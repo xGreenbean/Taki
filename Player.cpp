@@ -27,7 +27,7 @@ Player& Player::operator=(const Player& other){
     this->num_of_cards = other.num_of_cards;
     for (size_t i = 0; i < num_of_cards; i++) {
       Card * temp = new Card();
-      (*temp) = other.vector_cards.at(i);
+      (*temp) = (*other.vector_cards.at(i));
       vector_cards.push_back(temp);
     }
   }
