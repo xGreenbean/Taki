@@ -26,3 +26,16 @@ bool Game::getInt(int& value){
   std::cin >> value;
   return (std::cin.fail());
 }
+Game::~Game(){
+  auto it = deque_playes.begin();
+  Player * temp;
+  while(it != deque_playes.end()){
+    temp = (*it);
+    delete temp;
+    temp = nullptr;
+    it = deque_playes.erase(it);
+  }
+}
+Game::Game(){
+  
+}

@@ -11,6 +11,7 @@ private:
 	std::deque<Player *> deque_playes;
 	Player * curr_player;
 	bool direction;
+
 	Game& operator=(const Game& other);
 	Game(const Game& other);
 	void init();
@@ -19,4 +20,5 @@ public:
 	//public members and functions
 	void start();
 	~Game();
+	Game();
 };
