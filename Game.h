@@ -6,7 +6,7 @@
 class Game {
 private:
 	int num_players;
-	Card * currCard;
+	Card * curr_card;
 	int num_of_cards;
 	std::deque<Player *> deque_playes;
 	Player * curr_player;
@@ -16,6 +16,7 @@ private:
 	Game(const Game& other);
 	void init();
 	bool getInt(int& value);
+	void nextPlayer();
 public:
 	//public members and functions
 	void start();
