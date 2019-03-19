@@ -1,7 +1,7 @@
 appname := a.out
 
 CXX := g++
-CXXFLAGS := -std=c++11
+CXXFLAGS := -std=c++11 -fsanitize=address -fno-omit-frame-pointer
 
 srcfiles := $(shell find . -name "*.cpp")
 objects  := $(patsubst %.cpp, %.o, $(srcfiles))
