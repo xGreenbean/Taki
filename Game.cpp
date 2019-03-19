@@ -53,6 +53,9 @@ Game::~Game(){
   }
   delete curr_card;
   curr_card = nullptr;
+  if(curr_player)
+    delete curr_player;
+  curr_player = nullptr;
 }
 
 Game::Game(){
