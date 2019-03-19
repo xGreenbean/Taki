@@ -3,36 +3,22 @@
 #define CARDS "how many cards?"
 void Game::start(){
   init();
+
   curr_player = deque_playes.front();
   deque_playes.pop_front();
 
   while(true){
 
     if((*curr_player).play((*curr_card))){
-
-      if((*curr_player).isEmpty()){
-        std::cout << "we have a winner" << '\n';
+      if(isOver())
         return;
-      }
-      else{
+      else
         nextPlayer();
+      continue;
       }
-
-    }else{
-      Player * temp = curr_player;
-      if(direction){
-        curr_player = deque_playes.front();
-        deque_playes.pop_front();
-        deque_playes.push_back(temp);
-      }
-      else{
-        curr_player = deque_playes.back();
-        deque_playes.pop_back();
-        deque_playes.push_front(temp);
-      }
+      nextTurn();
     }
-  }
-};
+}
 void Game::init(){
   std::cout << PLAYERS << '\n';
   if(getInt(num_players))
@@ -68,12 +54,15 @@ Game::~Game(){
   delete curr_card;
   curr_card = nullptr;
 }
+
 Game::Game(){
   direction = true;
 }
 void Game::nextPlayer(){
   Player * temp;
-  switch((*curr_card).get_sign()){
+  sign card_sign = (*curr_card).get_sign();
+
+  switch(card_sign){
     case sign::CD:
       direction = !direction;
       temp = curr_player;
@@ -87,42 +76,31 @@ void Game::nextPlayer(){
         deque_playes.pop_back();
         deque_playes.push_front(temp);
       }
-
       break;
     case sign::STOP:
-      temp = curr_player;
-      if(direction){
-        deque_playes.push_back(curr_player);
-        curr_player = deque_playes.front();
-        deque_playes.pop_front();
-        deque_playes.push_back(curr_player);
-        curr_player = deque_playes.front();
-        deque_playes.pop_front();
-      }
-      else{
-        deque_playes.push_front(curr_player);
-        curr_player = deque_playes.back();
-        deque_playes.pop_back();
-        deque_playes.push_front(curr_player);
-        curr_player = deque_playes.back();
-        deque_playes.pop_back();
-      }
+      nextTurn();
+      nextTurn();
       break;
     case sign::PLUS:
       break;
-
     default:
-      temp = curr_player;
-      if(direction){
-        curr_player = deque_playes.front();
-        deque_playes.pop_front();
-        deque_playes.push_back(temp);
-      }
-      else{
-        curr_player = deque_playes.back();
-        deque_playes.pop_back();
-        deque_playes.push_front(temp);
-      }
+      nextTurn();
       break;
+  }
+}
+bool Game::isOver(){
+  return ((*curr_player).isEmpty());
+}
+void Game::nextTurn(){
+  Player * temp = curr_player;
+  if(direction){
+    curr_player = deque_playes.front();
+    deque_playes.pop_front();
+    deque_playes.push_back(temp);
+  }
+  else{
+    curr_player = deque_playes.back();
+    deque_playes.pop_back();
+    deque_playes.push_front(temp);
   }
 }

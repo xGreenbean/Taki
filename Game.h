@@ -17,6 +17,8 @@ private:
 	void init();
 	bool getInt(int& value);
 	void nextPlayer();
+	bool isOver();
+	void nextTurn();
 public:
 	//public members and functions
 	void start();
