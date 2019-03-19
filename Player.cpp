@@ -54,11 +54,11 @@ bool Player::play(Card& curr_card){
     if(getInt(choice))
       throw std::string("Card choice ilegal");
 
-    if(choice <= 0 && choice >= num_of_cards){
+    if(choice <= 0 || choice > num_of_cards){
       takeCard();
       return false;
     }
-    choice --;
+    choice--;
     if(curr_card.is_legal(*vector_cards.at(choice))){
       curr_card = (*vector_cards.at(choice));
       putCard(choice);
@@ -79,7 +79,7 @@ void Player::putCard(int index){
   Card * temp = vector_cards.at(index);
   delete temp;
   vector_cards.erase(vector_cards.begin() + index);
-  num_of_cards --;
+  num_of_cards--;
 }
 bool Player::getInt(int& value){
   std::cin >> value;
