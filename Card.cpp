@@ -1,5 +1,5 @@
 #include "Card.h"
-#define RANDOM
+// #define RANDOM
 int Card::counter = 0;
 using namespace std;
 Card Card::generate_card() {
