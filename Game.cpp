@@ -2,22 +2,32 @@
 #define PLAYERS "how many players?"
 #define CARDS "how many cards?"
 void Game::start(){
-  init();
+  try{
+    init();
+  }catch(std::string& s){
+    std::cout << s << '\n';
+    return;
+  }
 
   curr_player = deque_playes.front();
   deque_playes.pop_front();
 
   while(true){
-
-    if((*curr_player).play((*curr_card))){
-      if(isOver())
-        return;
-      else
-        nextPlayer();
-      continue;
-      }
-      nextTurn();
+    try{
+      if((*curr_player).play((*curr_card))){
+        if(isOver())
+          return;
+        else
+          nextPlayer();
+        continue;
+        }
+        nextTurn();
+    }catch(std::string s){
+      std::cout << s << '\n';
+      return;
     }
+  }
+
 }
 void Game::init(){
   std::cout << PLAYERS << '\n';
