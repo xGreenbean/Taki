@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CARD_H
+#define CARD_H
 #include<string>
 #include<iostream>
 #include <random>
@@ -23,7 +24,7 @@ public:
 	static Card generate_card(); //return random card
 };
 
-
+#endif
 
 
 

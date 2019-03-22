@@ -1,5 +1,9 @@
 #include "Card.h"
-// #define RANDOM
+//#define RANDOM
+#define WINDOWS
+#ifdef WINDOWS
+#include <windows.h>
+#endif
 int Card::counter = 0;
 using namespace std;
 Card Card::generate_card() {
